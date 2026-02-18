@@ -3,13 +3,13 @@ console.log(first); // 10
 console.log(second); // 20
 console.log(foo); // [ 30, 40, 50 ]
 
-const {a, b, ...bar} = {
+const {a:z, c, ...bar} = {
     a: 10,
     b: 20,
     c: 30,
     d: 40
 };
 
-console.log(a); // 10
-console.log(b); // 20
+console.log(z); // 10
+console.log(c); // 20
 console.log(bar); // { c: 30, d: 40 }
