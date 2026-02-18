@@ -1,4 +1,4 @@
-// CommonJS syntax この授業ではこちらをメインで使用します
-const fs = require('fs');
-// ES Module syntax
-import fs from 'fs';
+// CommonJS構文 この授業ではこちらをメインで使用します
+const fs = require('fs'); // fsモジュールをCommonJS方式でインポート
+// ES Module構文
+import fs from 'fs'; // fsモジュールをES Module方式でインポート

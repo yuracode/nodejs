@@ -1,5 +1,8 @@
-const calc = require('./calc');
+// 同じディレクトリのcalc.jsファイルをインポート：計算モジュールを読み込み
+const calc = require('./calc'); // calc.jsをインポート
 
-calc.num = 5
+// calcオブジェクトのnumプロパティを5に変更
+calc.num = 5 // numプロパティを5に変更
 
-console.log(calc.num);
+// 変更後のnumプロパティの値をコンソールに表示
+console.log(calc.num); // 5を表示
