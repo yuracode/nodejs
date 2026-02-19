@@ -9,7 +9,7 @@ exports.add = (a, b) => a + b;
 
 // main.js
 const math = require('./math');
-console.log(math.add(2, 3)); // 5
+console.log(math.add(5, 3)); // 8
 ```
 
 **解説**: require('./ファイル名')でローカルモジュールをインポート。
@@ -33,13 +33,15 @@ console.log(greet.sayHello('World'));
 ### 課題3：複数のエクスポート
 ```javascript
 // utils.js
+exports.PI = 3.14159;
 exports.sum = (arr) => arr.reduce((a, b) => a + b, 0);
 exports.average = (arr) => exports.sum(arr) / arr.length;
 
 // main.js
 const utils = require('./utils');
-console.log(utils.sum([1, 2, 3])); // 6
-console.log(utils.average([1, 2, 3])); // 2
+console.log(utils.PI); // 3.14159
+console.log(utils.sum([1, 2, 3, 4])); // 10
+console.log(utils.average([1, 2, 3, 4])); // 2.5
 ```
 
 **解説**: 複数のプロパティをexportsに追加。
@@ -51,11 +53,11 @@ console.log(utils.average([1, 2, 3])); // 2
 ### 課題4：ES Moduleのインポート
 ```javascript
 // math.mjs
-export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
 
 // main.mjs
-import { add } from './math.mjs';
-console.log(add(2, 3));
+import { multiply } from './math.mjs';
+console.log(multiply(4, 5)); // 20
 ```
 
 **解説**: import { 名前 } from 'ファイル' で名前付きインポート。
@@ -137,15 +139,20 @@ npm start
 
 ### 課題10：module.exports
 ```javascript
-// lib.js
+// library.js
 module.exports = {
   add: (a, b) => a + b,
-  sub: (a, b) => a - b
+  subtract: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b
 };
 
-// main.js
-const lib = require('./lib');
-console.log(lib.add(1, 2));
+// calc.js
+const library = require('./library');
+console.log(library.add(10, 5)); // 15
+console.log(library.subtract(10, 5)); // 5
+console.log(library.multiply(10, 5)); // 50
+console.log(library.divide(10, 5)); // 2
 ```
 
 **解説**: module.exports = オブジェクト でエクスポート。
@@ -259,15 +266,22 @@ console.log(utils.capitalize('hello'));
 
 ### 課題18：設定モジュール
 ```javascript
-// config.mjs
+// settings.mjs
 export const database = {
   host: 'localhost',
-  port: 5432
+  port: 5432,
+  name: 'myapp'
 };
 
-export const api = {
-  port: 3000
+export const server = {
+  port: 3000,
+  timeout: 5000
 };
+
+// app.mjs
+import { database, server } from './settings.mjs';
+console.log(database);
+console.log(server);
 ```
 
 **解説**: 設定値をエクスポート。
