@@ -1,13 +1,13 @@
-// NOTE:
-// 6.4.0 のユーザーデータ例を再利用する。
+// NOTE: 6.4.0 のユーザーデータ例を再利用
 
 const express = require('express');
 const app = express();
-// テンプレートエンジンに EJS を設定
+
+// テンプレートエンジンを EJS に設定
 app.set('view engine', 'ejs');
 
 
-// URLパス public でも同じ静的ファイルを配信
+// /static パスで static ディレクトリの静的ファイルを配信
 app.use('/static', express.static('static'));
 
 const users = [
@@ -16,21 +16,29 @@ const users = [
     { id: 3, name: 'Charlie' }
 ];
 
-// GET /users
-// クエリパラメータ offset / limit でユーザー配列を部分取得する。
+// GET /users: クエリパラメータ offset/limit でユーザー一覧を部分取得
 app.get('/users', (req, res) => {
-    // クエリパラメータから offset と limit を取得
+    // クエリパラメータから offset と limit を取得（デフォルト: offset=0, limit=全件）
     const offset = parseInt(req.query.offset) || 0;
     const limit = parseInt(req.query.limit) || users.length;
-    // 取得範囲で配列を切り出す
+
+    // 指定された範囲でユーザー配列を切り出す
     const slicedUsers = users.slice(offset, offset + limit);
 
-    // users.ejs を使って HTML を生成して返す
+    // users.ejs でレンダリングして返す
     res.render('users', { users: slicedUsers });
     
 });
 
+// GET /api/users: クエリパラメータ offset/limit でユーザー一覧を部分取得して JSON で返す
+app.get('/api/users', (req, res) => {
+    const offset = parseInt(req.query.offset) || 0;
+    const limit = parseInt(req.query.limit) || users.length;
+    const slicedUsers = users.slice(offset, offset + limit);
+    res.json(slicedUsers);
+});
+
+// サーバーをポート 3000 で起動
 app.listen(3000, () => {
-    // サーバー起動完了ログ
     console.log('Server is running on port 3000');
 });
