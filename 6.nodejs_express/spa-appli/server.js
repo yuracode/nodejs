@@ -15,6 +15,7 @@ const questions =  [
 
 const app = express();
 app.use(cors());
+app.use(express.static('public'));
 
 app.get('/api/questions', (req, res) => {
     const id = req.query.id;
