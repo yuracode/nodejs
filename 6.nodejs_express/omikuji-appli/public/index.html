@@ -12,8 +12,15 @@
 
     <script>
         async function getOmikuji() {
-            const res = await fetch('http://localhost:3000/api/omikuji');
+            const res = await fetch('http://localhost:3000/api/omikuji',{
+                method: 'GET',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                // body: JSON.stringify({name: 'hoge'}) // JSON.stringify({name: 'hoge'})のように文字列化する必要があります。
+            });
             const data = await res.json();
+            // document.getElementById('result').textContent = data.name + ':' + data.result;
             document.getElementById('result').textContent = data.result;
         }
         //thenを使う場合
