@@ -37,7 +37,12 @@ app.get('/api/users', (req, res) => {
     const slicedUsers = users.slice(offset, offset + limit);
     res.json(slicedUsers);
 });
-
+app.post('/calculate', (req, res) => {
+  const num1 = parseInt(req.body.number1);
+  const num2 = parseInt(req.body.number2);
+  const result = num1 + num2;
+  res.json({ result });
+});
 // サーバーをポート 3000 で起動
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
